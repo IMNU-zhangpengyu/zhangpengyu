@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zpy.ssm.mapper.TypeMapperCustom" >
+
+	<!-- 定义查询的sql片段，查询条件 -->
+	<sql id="query_type_where">
+	<!-- 使用动态sql，通过if判断满足条件 -->
+		<if test="typeCustom!=null">
+			<if test="typeCustom.type!=null and typeCustom.type!=''">
+				type.type like '%${typeCustom.type}%'  
+			</if>
+			
+		</if>
+		
+	</sql>
+
+  <!-- 类型查询 -->
+  <!-- parameterType传入包装对象（包装了查询条件）
+  	resultType使用扩展对象
+   -->
+  
+  <select id="findTypeList" parameterType="cn.zpy.ssm.po.TypeQueryVo" 
+  	resultType="cn.zpy.ssm.po.TypeCustom">
+  	select type.* from type 
+  	<where>
+  		<include refid="query_type_where"></include>
+  	</where> 
+  	
+  
+  </select>
+</mapper>
