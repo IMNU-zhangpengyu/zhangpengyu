@@ -8,7 +8,7 @@
 	
 	<style type="text/css">
 		ul{
-		 	margin:-8px auto;
+		 	margin: auto;
 			width: 1920px;
 			height: 1080px auto;
 			padding: 0px;
@@ -24,8 +24,8 @@
 			height: 50px;
 			font-family: Microsoft Yahei;
 			line-height: 50px;
-			background-color: #2f4f4f;
-			margin: 0px 0px;
+			background-color: #2f4f4;
+			margin: auto;
 			color: #fff;
 			text-align: center;
 			text-decoration: none;

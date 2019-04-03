@@ -1,18 +1,25 @@
 package cn.zpy.ssm.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.zpy.ssm.po.TypeCustom;
+import cn.zpy.ssm.po.TypeQueryVo;
 import cn.zpy.ssm.service.TypeService;
 
 /**
@@ -29,13 +36,13 @@ public class TypeController {
 
 	// 分类查询
 	@RequestMapping("/queryType")
-	public ModelAndView queryType(HttpServletRequest request) throws Exception {
+	public ModelAndView queryType(HttpServletRequest request,TypeQueryVo typeQueryVo) throws Exception {
 		//测试forward后request是否可以共享
 		
 		//System.out.println(request.getParameter("id"));
 
 		// 调用service查找 数据库，查询分类列表
-		List<TypeCustom> typeList = typeService.findTypeList(null);
+		List<TypeCustom> typeList = typeService.findTypeList(typeQueryVo);
 		
 		// 返回ModelAndView
 		ModelAndView modelAndView = new ModelAndView();
@@ -91,18 +98,57 @@ public class TypeController {
 	
 	//分类信息修改提交
 	@RequestMapping("/editTypeSubmit")
-	public ModelAndView editTypeSubmit()throws Exception {
-		// 返回ModelAndView
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("success");
+	public String editTypeSubmit(
+			Model model,
+			HttpServletRequest request,Integer typeid,
+			 @Validated TypeCustom typeCustom,BindingResult bindingResult,
+			MultipartFile pic 
+			)throws Exception {
 		
-		return modelAndView;
-		
-	}
-	public String editTypeSubmit(HttpServletRequest request,Integer id,TypeCustom typeCustom)throws Exception {
+		// 获取校验错误信息
+		if (bindingResult.hasErrors()) {
+			// 输出错误信息
+			List<ObjectError> allErrors = bindingResult.getAllErrors();
+
+			for (ObjectError objectError : allErrors) {
+				// 输出错误信息
+				System.out.println(objectError.getDefaultMessage());
+
+			}
+			// 将错误信息传到页面
+			model.addAttribute("allErrors", allErrors);
+			
+			
+			//可以直接使用model将提交pojo回显到页面
+			//model.addAttribute("type", typeCustom);
+			
+			// 出错重新到商品修改页面
+			return "type/editType";
+		}
+		//原始名称
+				String originalFilename = pic.getOriginalFilename();
+		//上传图片
+		if(pic!=null && originalFilename!=null && originalFilename.length()>0){
+			
+			//存储图片的物理路径
+			String pic_path = "D:\\git_work\\zhangpengyu\\temp\\";
+			
+			
+			//新的图片名称
+			String newFileName = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf("."));
+			//新图片
+			File newFile = new File(pic_path+newFileName);
+			
+			//将内存中的数据写入磁盘
+			pic.transferTo(newFile);
+			
+			//将新图片名称写到typeCustom中
+			//typeCustom.setPic(newFileName);
+			
+		}
 		
 		//调用service更新分类信息，页面需要将分类信息传到此方法
-		typeService.updateType(id, typeCustom);
+		typeService.updateType(typeid, typeCustom);
 		
 		//重定向到分类查询列表
 //		return "redirect:queryType.action";

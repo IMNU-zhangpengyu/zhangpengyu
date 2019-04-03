@@ -11,32 +11,40 @@
 </head>
 <body> 
 
-<form id="typeForm" action="${pageContext.request.contextPath }/type/editTypeSubmit.action" method="post" >
+<!-- 显示错误信息 -->
+	<c:if test="${allErrors!=null }">
+		<c:forEach items="${allErrors }" var="error">
+		${ error.defaultMessage}<br/>
+	</c:forEach>
+	</c:if>
+
+<form id="typeForm" action="${pageContext.request.contextPath }/type/editTypeSubmit.action" method="post" enctype="multipart/form-data">
 <input type="hidden" name="typeid" value="${typeCustom.typeid }"/>
 修改商品信息：
 <table width="100%" border=1>
 <tr>
-	<td>商品名称</td>
-	<td><input type="text" name="name" value="${typeCustom.type }"/></td>
+	<td>分类ID</td>
+	<td><input type="text" name="typeid" value="${typeCustom.typeid }"/></td>
 </tr>
 <tr>
-	<td>商品价格</td>
-	<td><input type="text" name="price" value="${typeCustom.type }"/></td>
+	<td>分类名称</td>
+	<td><input type="text" name="type" value="${typeCustom.type }"/></td>
 </tr>
 <%--<tr>
 	<td>商品生产日期</td>
 	<td><input type="text" name="createtime" value="<fmt:formatDate value="${typeCustom.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
 </tr>
+--%>
  <tr>
 	<td>商品图片</td>
 	<td>
-		<c:if test="${item.pic !=null}">
+		<%--<c:if test="${item.pic !=null}">
 			<img src="/pic/${item.pic}" width=100 height=100/>
 			<br/>
-		</c:if>
-		<input type="file"  name="pictureFile"/> 
+		</c:if>--%>
+		<input type="file"  name="pic"/> 
 	</td>
-</tr> --%>
+</tr> 
 <tr>
 	<td>商品简介</td>
 	<td>
