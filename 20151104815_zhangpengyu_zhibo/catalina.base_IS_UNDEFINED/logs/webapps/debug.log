@@ -1,0 +1,10 @@
+2019-04-22 12:01:53.214 [main] DEBUG com.zpy.o2o.util.ImageUtil - current relativeAddr is:upload\item\room\5\2019042212015316118.jpg
+2019-04-22 12:01:53.222 [main] DEBUG com.zpy.o2o.util.ImageUtil - current complete addr is:D:\git_work\zhangpengyu\image1\upload\item\room\5\2019042212015316118.jpg
+2019-04-22 12:28:47.767 [main] DEBUG com.zpy.o2o.util.ImageUtil - current relativeAddr is:upload\item\room\7\2019042212284728431.jpg
+2019-04-22 12:28:47.769 [main] DEBUG com.zpy.o2o.util.ImageUtil - current complete addr is:D:\git_work\zhangpengyu\image1\upload\item\room\7\2019042212284728431.jpg
+2019-04-22 14:42:31.552 [main] DEBUG com.zpy.o2o.util.ImageUtil - current relativeAddr is:upload\item\room\2\2019042214423120467.jpg
+2019-04-22 14:42:31.555 [main] DEBUG com.zpy.o2o.util.ImageUtil - current complete addr is:D:\git_work\zhangpengyu\image1\upload\item\room\2\2019042214423120467.jpg
+2019-04-22 14:45:06.064 [main] DEBUG com.zpy.o2o.util.ImageUtil - current relativeAddr is:upload\item\room\2\2019042214450676422.jpg
+2019-04-22 14:45:06.067 [main] DEBUG com.zpy.o2o.util.ImageUtil - current complete addr is:D:\git_work\zhangpengyu\image1\upload\item\room\2\2019042214450676422.jpg
+2019-04-22 14:46:11.965 [main] DEBUG com.zpy.o2o.util.ImageUtil - current relativeAddr is:upload\item\room\2\2019042214461146992.jpg
+2019-04-22 14:46:11.967 [main] DEBUG com.zpy.o2o.util.ImageUtil - current complete addr is:D:\git_work\zhangpengyu\image1\upload\item\room\2\2019042214461146992.jpg

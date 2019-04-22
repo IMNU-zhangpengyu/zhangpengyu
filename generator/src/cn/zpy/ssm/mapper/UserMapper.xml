@@ -2,9 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.zpy.ssm.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="cn.zpy.ssm.po.User" >
-    <result column="userId" property="userid" jdbcType="INTEGER" />
+    <id column="userId" property="userid" jdbcType="INTEGER" />
     <result column="userName" property="username" jdbcType="VARCHAR" />
-    <result column="passWord" property="password" jdbcType="VARCHAR" />
+    <result column="headimg" property="headimg" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="usercenter" property="usercenter" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastedittime" property="lastedittime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    userId, userName, passWord
+    userId, userName, headimg, email, usercenter, enable, usertype, createtime, lastedittime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zpy.ssm.po.UserExample" >
     select
@@ -81,6 +87,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="cn.zpy.ssm.po.UserExample" >
     delete from user
     <if test="_parameter != null" >
@@ -88,9 +104,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.zpy.ssm.po.User" >
-    insert into user (userId, userName, passWord
+    insert into user (userId, userName, headimg, 
+      email, usercenter, enable, 
+      usertype, createtime, lastedittime
       )
-    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{usercenter,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, 
+      #{usertype,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{lastedittime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.zpy.ssm.po.User" >
@@ -102,8 +122,26 @@
       <if test="username != null" >
         userName,
       </if>
-      <if test="password != null" >
-        passWord,
+      <if test="headimg != null" >
+        headimg,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="usercenter != null" >
+        usercenter,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastedittime != null" >
+        lastedittime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -113,8 +151,26 @@
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usercenter != null" >
+        #{usercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastedittime != null" >
+        #{lastedittime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -133,8 +189,26 @@
       <if test="record.username != null" >
         userName = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.password != null" >
-        passWord = #{record.password,jdbcType=VARCHAR},
+      <if test="record.headimg != null" >
+        headimg = #{record.headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usercenter != null" >
+        usercenter = #{record.usercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=INTEGER},
+      </if>
+      <if test="record.usertype != null" >
+        usertype = #{record.usertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastedittime != null" >
+        lastedittime = #{record.lastedittime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -145,9 +219,57 @@
     update user
     set userId = #{record.userid,jdbcType=INTEGER},
       userName = #{record.username,jdbcType=VARCHAR},
-      passWord = #{record.password,jdbcType=VARCHAR}
+      headimg = #{record.headimg,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      usercenter = #{record.usercenter,jdbcType=VARCHAR},
+      enable = #{record.enable,jdbcType=INTEGER},
+      usertype = #{record.usertype,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      lastedittime = #{record.lastedittime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zpy.ssm.po.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        headimg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usercenter != null" >
+        usercenter = #{usercenter,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastedittime != null" >
+        lastedittime = #{lastedittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zpy.ssm.po.User" >
+    update user
+    set userName = #{username,jdbcType=VARCHAR},
+      headimg = #{headimg,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      usercenter = #{usercenter,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      usertype = #{usertype,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastedittime = #{lastedittime,jdbcType=TIMESTAMP}
+    where userId = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

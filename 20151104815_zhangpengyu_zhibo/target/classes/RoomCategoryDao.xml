@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zpy.o2o.dao.RoomCategoryDao">
+	<select id="queryRoomCategory" resultType="com.zpy.o2o.entity.RoomCategory">
+		SELECT
+		room_category_id,
+		room_category_name,
+		room_category_desc,
+		room_category_img,
+		priority,
+		create_time,
+		last_edit_time,
+		parent_id
+		FROM
+		tb_room_category
+		<where>
+			<if test="roomCategoryCondition==null">
+				and parent_id is null
+			</if>
+			<if test="roomCategoryCondition!=null">
+				and parent_id is not null
+			</if>
+			<if test="roomCategoryCondition!=null and roomCategoryCondition.parent!=null">
+				and parent_id = #{roomCategoryCondition.parent.roomCategoryId}
+			</if>
+		</where>
+		ORDER BY
+		priority DESC
+	</select>
+</mapper>

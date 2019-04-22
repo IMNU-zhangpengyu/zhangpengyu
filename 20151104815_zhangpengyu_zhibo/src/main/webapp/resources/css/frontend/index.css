@@ -1,0 +1,66 @@
+.index-banner {
+    height: 35%;
+    padding-bottom: 0.4rem;
+}
+.img-wrap {
+    overflow: hidden;
+}
+.banner-img {
+    width: 100%;
+    height: 100%;
+}
+.total-room-button {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    padding-left: 0.85rem;
+    margin-bottom: 0.4rem;
+    position: relative;
+    cursor: pointer;
+}
+.total-room-button:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    width: 0.15rem;
+    height: 1.5rem;
+    background-color: #0894ec;
+}
+.room-classify {
+    height: 3.3rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+.room-classify > .word {
+    width: 65%;
+    height: 100%;
+    overflow: hidden;
+    float: left;
+}
+.room-classify > .word > p {
+    margin: 0;
+}
+.room-classify > .word > .room-title {
+    margin: 0;
+    font-size: 0.8rem;
+}
+.room-classify > .word > .room-desc {
+    margin: 0;
+    font-size: 0.4rem;
+}
+// .room-classify > .room-img {
+//     width: 2.4rem;
+//     height: 2.4rem;
+//     margin-left: 0.2rem;
+//     display: inline-block;
+// }
+.room-classify > .room-classify-img-warp {
+    width: 30%;
+    height: 100%;
+    margin-left: 0.2rem;
+    display: inline-block;
+}
+.room-classify > .room-classify-img-warp > .room-img {
+    width: 100%;
+    height: 100%;
+}

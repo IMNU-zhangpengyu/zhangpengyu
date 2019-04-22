@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zpy.o2o.dao.RoomDao">
+	<resultMap type="com.zpy.o2o.entity.Room" id="roomMap">
+		<id column="room_id" property="roomId" />
+		<result column="room_name" property="roomName" />
+		<result column="room_desc" property="roomDesc" />
+		<result column="room_addr" property="roomAddr" />
+		<result column="phone" property="phone" />
+		<result column="room_img" property="roomImg" />
+		<result column="priority" property="priority" />
+		<result column="create_time" property="createTime" />
+		<result column="last_edit_time" property="lastEditTime" />
+		<result column="enable_status" property="enableStatus" />
+		<result column="advice" property="advice" />
+		<association property="area" column="area_id"
+			javaType="com.zpy.o2o.entity.Area">
+			<id column="area_id" property="areaId" />
+			<result column="area_name" property="areaName" />
+		</association>
+		<association property="roomCategory"
+			column="room_category_id" javaType="com.zpy.o2o.entity.RoomCategory">
+			<id column="room_category_id" property="roomCategoryId" />
+			<result column="room_category_name"
+				property="roomCategoryName" />
+		</association>
+		<association property="owner" column="user_id"
+			javaType="com.zpy.o2o.entity.PersonInfo">
+			<id column="user_id" property="userId" />
+			<result column="name" property="name" />
+		</association>
+	</resultMap>
+	<select id="queryRoomList" resultMap="roomMap">
+		SELECT
+		r.room_id,
+		r.room_name,
+		r.room_desc,
+		r.room_addr,
+		r.phone,
+		r.room_img,
+		r.priority,
+		r.create_time,
+		r.last_edit_time,
+		r.enable_status,
+		r.advice,
+		a.area_id,
+		a.area_name,
+		rc.room_category_id,
+		rc.room_category_name
+		FROM
+		tb_room r,
+		tb_area a,
+		tb_room_category rc
+		<where>
+			<if test="roomCondition.roomCategory != null and 
+				roomCondition.roomCategory.roomCategoryId != null">
+				and r.room_category_id = #{roomCondition.roomCategory.roomCategoryId}
+			</if>
+			<if test="roomCondition.area != null and 
+				roomCondition.area.areaId != null">
+				and r.area_id = #{roomCondition.area.areaId}
+			</if>
+			<if test="roomCondition.roomName != null">
+				and r.room_name like '%${roomCondition.roomName}%'
+			</if>
+			<if test="roomCondition.enableStatus != null">
+				and r.enable_status = #{roomCondition.enableStatus}
+			</if>
+			<if test="roomCondition.owner != null and roomCondition.owner.userId != null">
+				and r.owner_id = #{roomCondition.owner.userId}
+			</if>
+			AND
+			r.area_id = a.area_id
+			AND
+			r.room_category_id = rc.room_category_id
+		</where>
+		ORDER BY
+		r.priority DESC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<select id="queryRoomCount" resultType="int">
+		SELECT
+		count(1)
+		FROM
+		tb_room r,
+		tb_area a,
+		tb_room_category rc
+		<where>
+			<if test="roomCondition.roomCategory != null and 
+				roomCondition.roomCategory.roomCategoryId != null">
+				and r.room_category_id = #{roomCondition.roomCategory.roomCategoryId}
+			</if>
+			<if test="roomCondition.area != null and 
+				roomCondition.area.areaId != null">
+				and r.area_id = #{roomCondition.area.areaId}
+			</if>
+			<if test="roomCondition.roomName != null">
+				and r.room_name like '%${roomCondition.roomName}%'
+			</if>
+			<if test="roomCondition.enableStatus != null">
+				and r.enable_status = #{roomCondition.enableStatus}
+			</if>
+			<if test="roomCondition.owner != null and roomCondition.owner.userId != null">
+				and r.owner_id = #{roomCondition.owner.userId}
+			</if>
+			AND
+			r.area_id = a.area_id
+			AND
+			r.room_category_id = rc.room_category_id
+		</where>
+	</select>
+	<select id="queryByRoomId" resultMap="roomMap"
+		parameterType="Long">
+		SELECT
+		r.room_id,
+		r.room_name,
+		r.room_desc,
+		r.room_addr,
+		r.phone,
+		r.room_img,
+		r.priority,
+		r.create_time,
+		r.last_edit_time,
+		r.enable_status,
+		r.advice,
+		a.area_id,
+		a.area_name,
+		rc.room_category_id,
+		rc.room_category_name
+		FROM
+		tb_room r,
+		tb_area a,
+		tb_room_category rc
+		WHERE
+		r.area_id = a.area_id
+		AND
+		r.room_category_id = rc.room_category_id
+		AND
+		r.room_id = #{roomId}
+	</select>
+	<insert id="insertRoom" useGeneratedKeys="true"
+		keyColumn="room_id" keyProperty="roomId">
+		INSERT INTO
+		tb_room(owner_id,area_id,room_category_id,room_name,room_desc,room_addr,
+		phone,room_img,priority,create_time,last_edit_time,enable_status,advice)
+		VALUES
+		(#{owner.userId},#{area.areaId},#{roomCategory.roomCategoryId},
+		#{roomName},#{roomDesc},#{roomAddr},#{phone},#{roomImg},#{priority},#{createTime},#{lastEditTime},
+		#{enableStatus},#{advice})
+	</insert>
+	<update id="updateRoom" parameterType="com.zpy.o2o.entity.Room">
+		update tb_room
+		<set>
+			<if test="roomName != null">room_name=#{roomName},</if>
+			<if test="roomDesc != null">room_desc=#{roomDesc},</if>
+			<if test="roomAddr != null">room_addr=#{roomAddr},</if>
+			<if test="phone != null">phone=#{phone},</if>
+			<if test="roomImg != null">room_img=#{roomImg},</if>
+			<if test="priority != null">priority=#{priority},</if>
+			<if test="lastEditTime != null">last_edit_time=#{lastEditTime},</if>
+			<if test="enableStatus != null">enable_status=#{enableStatus},</if>
+			<if test="advice != null">advice=#{advice},</if>
+			<if test="area != null">area_id=#{area.areaId},</if>
+			<if test="roomCategory != null">room_category_id=#{roomCategory.roomCategoryId}</if>
+		</set>
+		where room_id=#{roomId}
+	</update>
+</mapper>

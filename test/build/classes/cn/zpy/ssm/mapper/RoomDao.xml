@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zpy.ssm.dao.RoomDao">
+	<insert id="insertRoom" useGeneratedKeys="true" keyProperty="roomId"
+		keyColumn="roomid">
+		<!-- 具体的sql -->
+		insert into room (ownerid, roomtypeid, 
+      roomname, roomdesc, roomimg, 
+      priority, createtime, lastedittime, 
+      advice)
+    values (#{owner.userid}, #{roomtypr.roomtypeid}, 
+      #{roomname}, #{roomdesc}, #{roomimg}, 
+      #{priority}, #{createtime}, #{lastedittime}, 
+      #{advice})
+	</insert>
+</mapper>

@@ -1,0 +1,241 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册房间</title>
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+
+</head>
+<body>
+
+	<header class="bar bar-nav">
+		<h1 class="title">注册房间</h1>
+	</header>
+	<ul>
+		<li>
+			<div>
+				房间名<input type="text" id="room-name" placeholder="取一个名字吧！">
+			</div>
+		</li>
+		<li>
+			<div>
+				房间分类
+				<select id="room-category">
+				</select>
+			</div>
+		</li>
+		<li>
+			<div>
+				区域
+				<select id="area">
+				</select>
+			</div>
+		</li>
+		<li>
+			<div>
+				地址<input type="text" id="room-addr" placeholder="">
+			</div>
+		</li>
+		<li>
+			<div>
+				图片<input type="file" id="room-img">
+			</div>
+		</li>
+		<li>
+			<div>
+				简介
+				<textarea id="room-desc" placeholder="描述一下"></textarea>
+			</div>
+		</li>
+		
+		<li>
+			<div>
+				验证码<input type="text" id="j_captcha" placeholder="验证码">
+			</div>
+			<div>
+				<img id="captcha_img" alt="点击更换" title="点击更换"
+				onclick="changeVerifyCode(this)" src="../Kaptcha"/>
+			</div>
+		</li>
+	</ul>
+	<div>
+		<a href="#" >返回</a>
+		<a href="#" id="submit">提交</a>
+	</div>
+	
+  <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+		 <script type='text/javascript' src='../resources/js/jquery-3.2.1.min.js' charset='utf-8' ></script>
+	<script src="https://cdn.bootcss.com/jquery-toast-plugin/1.3.2/jquery.toast.js"></script>
+	<link href="https://cdn.bootcss.com/jquery-toast-plugin/1.3.2/jquery.toast.css" rel="stylesheet">
+	<script type='text/javascript' src='../resources/js/common/common.js' charset='utf-8' ></script>
+	<script type='text/javascript' src='../resources/js/room/roomoperation.js' charset='utf-8' ></script>
+	
+</body>
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>商店信息</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="../resources/css/out/sm-extend.min.css">
+<link rel="stylesheet" href="../resources/css/out/sm.min.css">
+</head>
+<body>
+	<header class="bar bar-nav">
+		<h1 class="title">商店信息</h1>
+	</header>
+	<div class="content">
+		<div class="list-block">
+			<ul>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-name"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">商铺名称</div>
+							<div class="item-input">
+								<input type="text" id="room-name" placeholder="商铺名称">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">商铺分类</div>
+							<div class="item-input">
+								<select id="room-category">
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">所属区域</div>
+							<div class="item-input">
+								<select id="area">
+								</select>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">详细地址</div>
+							<div class="item-input">
+								<input type="text" id="room-addr" placeholder="详细地址">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">联系电话</div>
+							<div class="item-input">
+								<input type="tel" id="room-phone" placeholder="联系电话">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">缩略图</div>
+							<div class="item-input">
+								<input type="file" id="room-img">
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<div class="item-title label">店铺简介</div>
+							<div class="item-input">
+								<textarea placeholder="店铺简介" id="room-desc"></textarea>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="item-content">
+						<div class="item-media">
+							<i class="icon icon-form-email"></i>
+						</div>
+						<div class="item-inner">
+							<label for="j_captcha" class="item-title label">验证码</label> <input
+								id="j_captcha" name="j_captcha" type="text"
+								class="form-control in" placeholder="验证码" />
+							<div class="item-input">
+								<img id="captcha_img" alt="点击更换" title="点击更换"
+									onclick="changeVerifyCode(this)" src="../Kaptcha" />
+							</div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+		<div class="content-block">
+			<div class="row">
+				<div class="col-50">
+					<a href="#"
+						class="button button-big button-fill button-danger">返回</a>
+				</div>
+				<div class="col-50">
+					<a href="#" class="button button-big button-fill" id="submit">提交</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type='text/javascript' src='../resources/js/out/zepto.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../resources/js/out/sm.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../resources/js/out/sm-extend.min.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../resources/js/common/common.js' charset='utf-8'></script>
+	<script type='text/javascript' src='../resources/js/room/roomoperation.js' charset='utf-8'></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//WebContent/css/index.css=UTF-8
+encoding//WebContent/css/style.css=UTF-8
+encoding//WebContent/jsp/header.jsp=UTF-8
+encoding//WebContent/jsp/header1.jsp=UTF-8
+encoding//src/cn/zpy/ssm/dto/RoomExecution.java=UTF-8
+encoding//src/cn/zpy/ssm/enums/RoomStateEnum.java=UTF-8
+encoding//src/cn/zpy/ssm/po/TypeCustom.java=UTF-8
+encoding//src/cn/zpy/ssm/util/BaseServlet.java=UTF-8
+encoding//src/cn/zpy/ssm/util/JDBCUtils.java=UTF-8

@@ -43,11 +43,11 @@
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
 		<table schema="" tableName="user"></table>
-		<table schema="" tableName="type"></table>
-<!-- 	<table schema="" tableName="tb_item"></table>
-		<table schema="" tableName="tb_item_cat"></table>
-		<table schema="" tableName="tb_item_desc"></table>
-		<table schema="" tableName="tb_item_param"></table>
+		<table schema="" tableName="local"></table>
+		<table schema="" tableName="room"></table>
+		<table schema="" tableName="roomtype"></table>
+		<table schema="" tableName="wechat"></table>
+<!-- 	<table schema="" tableName="tb_item_param"></table>
 		<table schema="" tableName="tb_item_param_item"></table>
 		<table schema="" tableName="tb_order"></table>
 		<table schema="" tableName="tb_order_item"></table>
