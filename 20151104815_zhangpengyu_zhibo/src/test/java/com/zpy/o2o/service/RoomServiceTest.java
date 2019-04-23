@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zpy.o2o.BaseTest;
+import com.zpy.o2o.dto.ImageHolder;
 import com.zpy.o2o.dto.RoomExecution;
 import com.zpy.o2o.entity.Area;
 import com.zpy.o2o.entity.PersonInfo;
@@ -44,7 +45,8 @@ public class RoomServiceTest extends BaseTest{
 		room.setRoomName("修改后的房间名");
 		File roomImg = new File("D:/git_work/zhangpengyu/temp/3.jpg");
 		InputStream is = new FileInputStream(roomImg);
-		RoomExecution roomExecution = roomService.modifyRoom(room, is, "3.jpg");
+		ImageHolder imageHolder = new ImageHolder("3.jpg",is);
+		RoomExecution roomExecution = roomService.modifyRoom(room, imageHolder );
 		System.out.println(roomExecution.getRoom().getRoomImg());
 	}
 	
@@ -70,7 +72,8 @@ public class RoomServiceTest extends BaseTest{
 		room.setAdvice("审核中");
 		File roomImg = new File("D:/git_work/zhangpengyu/temp/2.jpg");
 		InputStream is = new FileInputStream(roomImg);
-		RoomExecution se = roomService.addRoom(room,is,roomImg.getName());
+		ImageHolder imageHolder = new ImageHolder(roomImg.getName(),is);
+		RoomExecution se = roomService.addRoom(room,imageHolder);
 		assertEquals(RoomStateEnum.CHECK.getState(),se.getState());
 	}
 }

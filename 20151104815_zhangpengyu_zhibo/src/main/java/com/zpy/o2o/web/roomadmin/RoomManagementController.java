@@ -18,6 +18,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zpy.o2o.dto.ImageHolder;
 import com.zpy.o2o.dto.RoomExecution;
 import com.zpy.o2o.entity.Area;
 import com.zpy.o2o.entity.PersonInfo;
@@ -162,9 +163,10 @@ public class RoomManagementController {
 			RoomExecution se;
 			try {
 				if (roomImg == null) {
-					se = roomService.modifyRoom(room, null, null);
+					se = roomService.modifyRoom(room, null);
 				} else {
-					se = roomService.modifyRoom(room, roomImg.getInputStream(), roomImg.getOriginalFilename());
+					ImageHolder imageHolder = new ImageHolder(roomImg.getOriginalFilename(),roomImg.getInputStream());
+					se = roomService.modifyRoom(room, imageHolder);
 				}
 				if (se.getState() == RoomStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
@@ -225,7 +227,8 @@ public class RoomManagementController {
 			room.setOwner(owner);
 			RoomExecution se;
 			try {
-				se = roomService.addRoom(room, roomImg.getInputStream(), roomImg.getOriginalFilename());
+				ImageHolder imageHolder = new ImageHolder(roomImg.getOriginalFilename(),roomImg.getInputStream());
+				se = roomService.addRoom(room,imageHolder);
 				if (se.getState() == RoomStateEnum.CHECK.getState()) {
 					modelMap.put("success", true);
 					//session中的owner的room列表

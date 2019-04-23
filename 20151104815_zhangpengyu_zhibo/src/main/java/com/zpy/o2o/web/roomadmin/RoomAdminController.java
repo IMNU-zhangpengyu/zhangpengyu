@@ -22,4 +22,14 @@ public class RoomAdminController {
 		//spring-web.xml中设置前后缀
 		return "room/roommanagement";
 	}
+	@RequestMapping(value ="/productcategorymanagement",method = RequestMethod.GET)
+	public String productCategoryManage() {
+		//类别管理
+		return "room/productcategorymanagement";
+	}
+	@RequestMapping(value ="/productoperation")
+	public String productOperation() {
+		//spring-web.xml中设置前后缀
+		return "room/productoperation";
+	}
 }

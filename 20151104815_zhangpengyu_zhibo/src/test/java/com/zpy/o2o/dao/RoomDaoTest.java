@@ -22,18 +22,20 @@ public class RoomDaoTest extends BaseTest{
 	@Test
 	public void testQueryRoomListAndCount() {
 		Room roomCondition = new Room();
-		PersonInfo owner = new PersonInfo();
-		owner.setUserId(1L);
-		roomCondition.setOwner(owner);
-		List<Room> roomList = roomDao.queryRoomList(roomCondition, 0, 2);
+		RoomCategory  childCategory = new RoomCategory();
+		RoomCategory  parentCategory = new RoomCategory();
+		parentCategory.setRoomCategoryId(12L);
+		childCategory.setParent(parentCategory);
+		roomCondition.setRoomCategory(childCategory);
+		List<Room> roomList = roomDao.queryRoomList(roomCondition, 0, 7);
 		int count = roomDao.queryRoomCount(roomCondition);
 		System.out.println("大小: " + roomList.size() + "  总数：" + count);
-		RoomCategory sc = new RoomCategory();
-		sc.setRoomCategoryId(1L);
-		roomCondition.setRoomCategory(sc);
-		roomList = roomDao.queryRoomList(roomCondition, 0, 2);
-		count = roomDao.queryRoomCount(roomCondition);
-		System.out.println("大小: " + roomList.size() + "  总数：" + count);
+//		RoomCategory sc = new RoomCategory();
+//		sc.setRoomCategoryId(1L);
+//		roomCondition.setRoomCategory(sc);
+//		roomList = roomDao.queryRoomList(roomCondition, 0, 2);
+//		count = roomDao.queryRoomCount(roomCondition);
+//		System.out.println("大小: " + roomList.size() + "  总数：" + count);
 	}
 	
 	@Test

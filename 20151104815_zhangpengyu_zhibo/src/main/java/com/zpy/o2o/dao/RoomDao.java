@@ -16,6 +16,7 @@ public interface RoomDao {
 	 */
 	List<Room> queryRoomList(@Param("roomCondition")Room roomCondition,
 			@Param("rowIndex")int rowIndex,@Param("pageSize")int pageSize);
+	
 	/**
 	 * 返回queryRoomList总数
 	 * @param roomCondition

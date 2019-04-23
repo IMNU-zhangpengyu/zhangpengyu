@@ -2,7 +2,6 @@ package com.zpy.o2o.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -12,6 +11,8 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import com.zpy.o2o.dto.ImageHolder;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
@@ -28,9 +29,9 @@ public class ImageUtil {
 	// 日志相关
 	private static Logger logger = LoggerFactory.getLogger(ImageUtil.class);
 
-	public static String generateThumbnail(InputStream thumbnailInputStream,String fileName, String targetAddr) {
+	public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtension(fileName);
+		String extension = getFileExtension(thumbnail.getImageName());
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		logger.debug("current relativeAddr is:" + relativeAddr);
@@ -38,7 +39,7 @@ public class ImageUtil {
 		logger.debug("current complete addr is:" + PathUtil.getImgBasePath() + relativeAddr);
 		// 创建缩略图并加水映
 		try {
-			Thumbnails.of(thumbnailInputStream).size(788, 1080)
+			Thumbnails.of(thumbnail.getImage()).size(788, 1080)
 					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/budingzhibobaise.png")), 0.8f)
 					.outputQuality(1f).toFile(dest);
 		} catch (IOException e) {

@@ -1,7 +1,6 @@
 package com.zpy.o2o.service;
 
-import java.io.InputStream;
-
+import com.zpy.o2o.dto.ImageHolder;
 import com.zpy.o2o.dto.RoomExecution;
 import com.zpy.o2o.entity.Room;
 import com.zpy.o2o.exceptions.RoomOperationException;
@@ -24,11 +23,11 @@ public interface RoomService {
 	/**
 	 * 更新房间信息，包括图片
 	 */
-	RoomExecution modifyRoom(Room room,InputStream roomImgInputStream,String fileName)throws RoomOperationException;
+	RoomExecution modifyRoom(Room room,ImageHolder thumbnail)throws RoomOperationException;
 
 	/**
 	 * 新建房间
 	 */
-	RoomExecution addRoom(Room room, InputStream roomImgInputStream,String fileName)throws RoomOperationException;
+	RoomExecution addRoom(Room room, ImageHolder thumbnail)throws RoomOperationException;
 
 }

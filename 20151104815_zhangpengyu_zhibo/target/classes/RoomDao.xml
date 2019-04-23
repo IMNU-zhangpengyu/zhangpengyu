@@ -58,6 +58,12 @@
 				roomCondition.roomCategory.roomCategoryId != null">
 				and r.room_category_id = #{roomCondition.roomCategory.roomCategoryId}
 			</if>
+			<if test="roomCondition.roomCategory != null
+				and roomCondition.roomCategory.parent != null
+				and roomCondition.roomCategory.parent.roomCategoryId != null">
+					and r.room_category_id in(select room_category_id from tb_room_category
+					WHERE parent_id = #{roomCondition.roomCategory.parent.roomCategoryId})
+			</if>
 			<if test="roomCondition.area != null and 
 				roomCondition.area.areaId != null">
 				and r.area_id = #{roomCondition.area.areaId}
@@ -91,6 +97,12 @@
 			<if test="roomCondition.roomCategory != null and 
 				roomCondition.roomCategory.roomCategoryId != null">
 				and r.room_category_id = #{roomCondition.roomCategory.roomCategoryId}
+			</if>
+			<if test="roomCondition.roomCategory != null
+				and roomCondition.roomCategory.parent != null
+				and roomCondition.roomCategory.parent.roomCategoryId != null">
+					and r.room_category_id in(select room_category_id from tb_room_category
+					WHERE parent_id = #{roomCondition.roomCategory.parent.roomCategoryId})
 			</if>
 			<if test="roomCondition.area != null and 
 				roomCondition.area.areaId != null">

@@ -8,9 +8,9 @@ public class PathUtil {
 		String os = System.getProperty("os.name");
 		String basePath = "";
 		if (os.toLowerCase().startsWith("win")) {
-			basePath = "D:/git_work/zhangpengyu/image1/";
+			basePath = "D:/git_work/zhangpengyu/image1";
 		} else {
-			basePath = "/home/zhangpengyu/image1/";
+			basePath = "/home/zhangpengyu/image1";
 		}
 		basePath = basePath.replace("/", seperator);
 		return basePath;
@@ -18,7 +18,7 @@ public class PathUtil {
 
 	//返回子路径
 	public static String getRoomImagePath(long roomId) {
-		String imagePath = "upload/item/room/" + roomId +"/";
+		String imagePath = "/upload/item/room/" + roomId +"/";
 		return imagePath.replace("/", seperator);
 	}
 }

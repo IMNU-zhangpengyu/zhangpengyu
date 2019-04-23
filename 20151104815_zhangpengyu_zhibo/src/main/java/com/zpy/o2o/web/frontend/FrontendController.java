@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/frontend")
 public class FrontendController {
 	
+	@RequestMapping(value = "/roomlist",method = RequestMethod.GET)
+	private String showRoomList() {
+		return "frontend/roomlist";
+	}
+	
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
 	private String index() {
 		return "frontend/index";

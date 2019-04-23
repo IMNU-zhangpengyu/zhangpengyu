@@ -1,6 +1,5 @@
 package com.zpy.o2o.service.impl;
 
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zpy.o2o.dao.RoomDao;
+import com.zpy.o2o.dto.ImageHolder;
 import com.zpy.o2o.dto.RoomExecution;
 import com.zpy.o2o.entity.Room;
 import com.zpy.o2o.enums.RoomStateEnum;
@@ -41,7 +41,7 @@ public class RoomServiceImpl implements RoomService {
 	
 	@Override
 	@Transactional
-	public RoomExecution addRoom(Room room, InputStream roomImgInputStream, String fileName) {
+	public RoomExecution addRoom(Room room, ImageHolder thumbnail) {
 		// 空值判断
 		if (room == null) {
 			return new RoomExecution(RoomStateEnum.NULL_ROOM);
@@ -57,10 +57,10 @@ public class RoomServiceImpl implements RoomService {
 			if (effectedNum <= 0) {
 				throw new RoomOperationException("房间创建失败");
 			} else {
-				if (roomImgInputStream != null) {
+				if (thumbnail.getImage() != null) {
 					// 存储图片
 					try {
-						addRoomImg(room, roomImgInputStream, fileName);
+						addRoomImg(room, thumbnail);
 					} catch (Exception e) {
 						throw new RoomOperationException("addRoomImg error:" + e.getMessage());
 					}
@@ -79,10 +79,10 @@ public class RoomServiceImpl implements RoomService {
 		return new RoomExecution(RoomStateEnum.CHECK, room);
 	}
 
-	private void addRoomImg(Room room, InputStream roomImgInputStream, String fileName) {
+	private void addRoomImg(Room room,ImageHolder thumbnail) {
 		// 获取room目录相对路径
 		String dest = PathUtil.getRoomImagePath(room.getRoomId());
-		String roomImgAddr = ImageUtil.generateThumbnail(roomImgInputStream, fileName, dest);
+		String roomImgAddr = ImageUtil.generateThumbnail(thumbnail, dest);
 		room.setRoomImg(roomImgAddr);
 	}
 
@@ -92,20 +92,20 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public RoomExecution modifyRoom(Room room, InputStream roomImgInputStream, String fileName)
+	public RoomExecution modifyRoom(Room room, ImageHolder thumbnail)
 			throws RoomOperationException {
 		if (room == null || room.getRoomId() == null) {
 			return new RoomExecution(RoomStateEnum.NULL_ROOM);
 		} else {
 			// 1判断是否需要处理图片
 			try {
-				if (roomImgInputStream != null && fileName != null && !"".equals(fileName)) {
+				if (thumbnail.getImage() != null && thumbnail.getImageName() != null && !"".equals(thumbnail.getImageName())) {
 					Room tempRoom = roomDao.queryByRoomId(room.getRoomId());
 					if (tempRoom.getRoomImg() != null) {
 						//先删除再添加
 						ImageUtil.deleteFileOrPath(tempRoom.getRoomImg());
 					}
-					addRoomImg(room, roomImgInputStream, fileName);
+					addRoomImg(room, thumbnail);
 				}
 				// 2更新
 				room.setLastEditTime(new Date());
