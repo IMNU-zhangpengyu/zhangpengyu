@@ -70,16 +70,20 @@ public class RoomManagementController {
 	@ResponseBody
 	private Map<String,Object> getRoomList(HttpServletRequest request){
 		Map<String,Object> modelMap = new HashMap<String,Object>();
-		PersonInfo user = new PersonInfo();
-		user.setUserId(1L);
-		user.setName("test");
-		request.getSession().setAttribute("user",user);
-		user = (PersonInfo) request.getSession().getAttribute("user");
+//		PersonInfo user = new PersonInfo();
+//		user.setUserId(1L);
+//		user.setName("test");
+//		request.getSession().setAttribute("user",user);
+//		user = (PersonInfo) request.getSession().getAttribute("user");
+		PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
+		
 		try {
 			Room roomCondition = new Room();
 			roomCondition.setOwner(user);
 			RoomExecution se = roomService.getRoomList(roomCondition, 0, 100);
 			modelMap.put("roomList",se.getRoomList());
+			//房間放入session
+			request.getSession().setAttribute("roomList",se.getRoomList());
 			modelMap.put("user",user);
 			modelMap.put("success",true);
 		}catch(Exception e) {

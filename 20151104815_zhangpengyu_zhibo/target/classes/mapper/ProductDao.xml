@@ -14,15 +14,12 @@
 		<result column="create_time" property="createTime" />
 		<result column="last_edit_time" property="lastEditTime" />
 		<result column="enable_status" property="enableStatus" />
-		<result column="point" property="point" />
 		<association property="productCategory" column="product_category_id"
 			javaType="com.zpy.o2o.entity.ProductCategory">
 			<id column="product_category_id" property="productCategoryId" />
 			<result column="product_category_name" property="productCategoryName" />
-			<result column="product_category_desc" property="productCategoryDesc" />
 			<result column="priority" property="priority" />
 			<result column="create_time" property="createTime" />
-			<result column="last_edit_time" property="lastEditTime" />
 		</association>
 		<association property="room" column="room_id"
 			javaType="com.zpy.o2o.entity.Room">
@@ -33,8 +30,6 @@
 			<result column="room_addr" property="roomAddr" />
 			<result column="phone" property="phone" />
 			<result column="room_img" property="roomImg" />
-			<result column="longitude" property="longitude" />
-			<result column="latitude" property="latitude" />
 			<result column="priority" property="priority" />
 			<result column="create_time" property="createTime" />
 			<result column="last_edit_time" property="lastEditTime" />
@@ -63,7 +58,6 @@
 		create_time,
 		last_edit_time,
 		enable_status,
-		point,
 		product_category_id,
 		room_id
 		FROM
@@ -132,7 +126,6 @@
 		p.create_time,
 		p.last_edit_time,
 		p.enable_status,
-		p.point,
 		p.product_category_id,
 		p.room_id,
 		pm.product_img_id,

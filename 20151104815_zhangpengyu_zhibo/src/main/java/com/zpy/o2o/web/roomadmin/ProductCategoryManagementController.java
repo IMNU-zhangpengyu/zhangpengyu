@@ -28,13 +28,16 @@ public class ProductCategoryManagementController {
 
 	@RequestMapping(value = "/getproductcategorylist", method = RequestMethod.GET)
 	@ResponseBody
-	private Result<List<ProductCategory>> getProductCategoryList(
-			HttpServletRequest request) {
+	private Result<List<ProductCategory>> getProductCategoryList(HttpServletRequest request) {
+		Room room = new Room();
+		//*****************待开发
+		room.setRoomId(1L);
+		request.getSession().setAttribute("currentRoom",room);
 		Room currentRoom = (Room) request.getSession().getAttribute(
 				"currentRoom");
 		List<ProductCategory> list = null;
 		if (currentRoom != null && currentRoom.getRoomId() > 0) {
-			list = productCategoryService.getByRoomId(currentRoom.getRoomId());
+			list = productCategoryService.getProductCategoryList(currentRoom.getRoomId());
 			return new Result<List<ProductCategory>>(true, list);// WEB-INF/html/"roomlist".html
 		} else {
 			ProductCategoryStateEnum ps = ProductCategoryStateEnum.INNER_ERROR;

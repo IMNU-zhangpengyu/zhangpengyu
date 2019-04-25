@@ -12,7 +12,7 @@ public interface ProductCategoryService {
 	 * @param long roomId
 	 * @return List<ProductCategory>
 	 */
-	List<ProductCategory> getByRoomId(long roomId);
+	List<ProductCategory> getProductCategoryList(long roomId);
 
 	/**
 	 * 

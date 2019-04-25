@@ -36,4 +36,30 @@
 	<!-- 4.扫描web相关的bean -->
 	<context:component-scan base-package="com.zpy.o2o.web" />
 	
+	<!-- 5.权限拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/roomadmin/**" />
+			<bean id="RoomInterceptor" 
+				class="com.zpy.o2o.interceptor.roomadmin.RoomLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/roomadmin/**" />
+			
+			<mvc:exclude-mapping path="/roomadmin/roomlist" />
+			<mvc:exclude-mapping path="/roomadmin/getroomlist" />
+			
+			<mvc:exclude-mapping path="/roomadmin/getroominitinfo" />
+			<mvc:exclude-mapping path="/roomadmin/registerroom" />
+			<mvc:exclude-mapping path="/roomadmin/roomoperation" />							
+			
+			<mvc:exclude-mapping path="/roomadmin/roommanagement" />
+			<mvc:exclude-mapping path="/roomadmin/getroommanagementinfo" />
+		
+			<bean id="RoomPermissionInterceptor"
+				class="com.zpy.o2o.interceptor.roomadmin.RoomPermissionInterceptor" />
+		</mvc:interceptor>
+		
+
+	</mvc:interceptors>
 </beans>

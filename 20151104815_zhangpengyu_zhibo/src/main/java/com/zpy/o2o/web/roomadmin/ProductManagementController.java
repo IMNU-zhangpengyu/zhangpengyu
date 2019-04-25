@@ -74,7 +74,7 @@ public class ProductManagementController {
 		if (productId > -1) {
 			Product product = productService.getProductById(productId);
 			List<ProductCategory> productCategoryList = productCategoryService
-					.getByRoomId(product.getRoom().getRoomId());
+					.getProductCategoryList(product.getRoom().getRoomId());
 			modelMap.put("product", product);
 			modelMap.put("productCategoryList", productCategoryList);
 			modelMap.put("success", true);
@@ -94,7 +94,7 @@ public class ProductManagementController {
 				"currentRoom");
 		if ((currentRoom != null) && (currentRoom.getRoomId() != null)) {
 			List<ProductCategory> productCategoryList = productCategoryService
-					.getByRoomId(currentRoom.getRoomId());
+					.getProductCategoryList(currentRoom.getRoomId());
 			modelMap.put("productCategoryList", productCategoryList);
 			modelMap.put("success", true);
 		} else {

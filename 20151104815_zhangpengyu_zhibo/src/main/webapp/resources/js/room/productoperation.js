@@ -1,6 +1,6 @@
 $(function() {
 	var productId = getQueryString('productId');
-	
+
 	var infoUrl = '/20151104815_zhangpengyu_zhibo/roomadmin/getproductbyid?productId=' + productId;
 	var categoryUrl = '/20151104815_zhangpengyu_zhibo/roomadmin/getproductcategorylist';
 	var productPostUrl = '/20151104815_zhangpengyu_zhibo/roomadmin/modifyproduct';
@@ -50,7 +50,7 @@ $(function() {
 	function getCategory() {
 		$.getJSON(categoryUrl, function(data) {
 			if (data.success) {
-				var productCategoryList = data.productCategoryList;
+				var productCategoryList = data.data;
 				var optionHtml = '';
 				productCategoryList.map(function(item, index) {
 					optionHtml += '<option data-value="'

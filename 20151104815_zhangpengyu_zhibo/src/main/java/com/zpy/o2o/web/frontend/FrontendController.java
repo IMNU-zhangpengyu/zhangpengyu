@@ -13,6 +13,16 @@ public class FrontendController {
 		return "frontend/roomlist";
 	}
 	
+	@RequestMapping(value = "/roomdetail",method = RequestMethod.GET)
+	private String showRoomDetail() {
+		return "frontend/roomdetail";
+	}
+	
+	@RequestMapping(value = "/productdetail",method = RequestMethod.GET)
+	private String showProductDetail() {
+		return "frontend/productdetail";
+	}
+	
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
 	private String index() {
 		return "frontend/index";
